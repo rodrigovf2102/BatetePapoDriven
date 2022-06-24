@@ -54,13 +54,13 @@ function ImprimirMensagens(resposta){
     if(resposta.data[i].type==="message"){
         document.querySelector(".corpo").innerHTML+= 
         `<div class="${resposta.data[i].type}">
-            (${resposta.data[i].time}) ${resposta.data[i].from} ${resposta.data[i].text}
+            (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
     if(resposta.data[i].type==="private-message"){
         document.querySelector(".corpo").innerHTML+= 
         `<div class="${resposta.data[i].type}">
-            (${resposta.data[i].time}) ${resposta.data[i].from} ${resposta.data[i].text}
+        (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
     }

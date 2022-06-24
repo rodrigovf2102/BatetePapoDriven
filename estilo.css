@@ -72,6 +72,7 @@
     margin-top: 80px;
     font-family: 'Roboto';
     font-size: 18px;
+    margin-bottom: 80px;
 }
 .corpo div{
     padding-top: 5px;
@@ -79,11 +80,21 @@
     padding-left: 3px;
     display: column;
     justify-content: center;
-    width: 90%;
+    width: 100%;
     word-wrap: break-word; 
+    line-height: 20px;
 }
 .corpo :nth-child(1){
     height: 26px;
+}
+.message{
+    background-color:#FFFFFF;
+}
+.status{
+    background-color:#DCDCDC;
+}
+.private-message{
+    background-color:#FFDEDE
 }
 
 .topo img{
