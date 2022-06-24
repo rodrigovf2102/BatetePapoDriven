@@ -40,6 +40,7 @@ function atualizarUsuarios(resposta){
     começarBatePapo = false;
 }
 
+
 function TratarErro(erro)
 {
     console.log(erro.response.status);
