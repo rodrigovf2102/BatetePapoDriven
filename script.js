@@ -11,8 +11,14 @@ function PegarUsuario(novoUsuario){
 function EnviarUsuario(){
     novoUsuario = { name: document.querySelector("input").value}
     console.log(novoUsuario);
-    if(começarBatePapo==true) usuarios.push(novoUsuario);
-    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",novoUsuario);
+    let promise;
+    if(começarBatePapo==true){
+        usuarios.push(novoUsuario);
+        promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",novoUsuario);
+    }
+    else{
+        promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status",novoUsuario);
+    }
     promise.then(ReceberUsuarios);
     promise.catch(TratarErro);
 }
@@ -29,7 +35,7 @@ function atualizarUsuarios(resposta){
     console.log(usuarios);
     if(começarBatePapo){
         setInterval(ativarBatePapo,3000);
-        setInterval(EnviarUsuario,1000);
+        setInterval(EnviarUsuario,5000);
     } 
     começarBatePapo = false;
 }
