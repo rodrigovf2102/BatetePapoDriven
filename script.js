@@ -29,7 +29,7 @@ function atualizarUsuarios(resposta){
     console.log(usuarios);
     if(começarBatePapo){
         setInterval(ativarBatePapo,3000);
-        setInterval(EnviarUsuario,5000);
+        setInterval(EnviarUsuario,1000);
     } 
     começarBatePapo = false;
 }
@@ -63,7 +63,7 @@ function ImprimirMensagens(resposta){
             (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
-    if(resposta.data[i].type==="private-message"){
+    if(resposta.data[i].type==="private-message"&&resposta.data[i].to === seuUsuario.name){
         msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
         (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
@@ -74,7 +74,6 @@ function ImprimirMensagens(resposta){
     if(ultimaMsgAnterior !== resposta.data[resposta.data.length-1].time.toString()) {
         window.scrollTo(0, document.body.scrollHeight);
     }
-    console.log(ultimaMsgAnterior,"1",resposta.data[resposta.data.length-1].time)
     ultimaMsgAnterior = resposta.data[resposta.data.length-1].time.toString();
 }
 
