@@ -23,6 +23,21 @@ function EnviarUsuario(){
     promise.catch(TratarErro);
 }
 
+function EnviarMsgAoServidor()
+{
+    let msg = document.querySelectorAll("input");
+    let novaMsg = {
+        from: seuUsuario.name, 
+        to: "Todos", 
+        text: msg[1].value, 
+        type: "message"
+    }
+    promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",novaMsg);
+    promise.then(ativarBatePapo);
+    promise.catch(TratarErroMsg); 
+    msg[1].value="Escreva aqui..."; 
+}
+
 function ReceberUsuarios(){
     seuUsuario = novoUsuario;
     document.querySelector(".entrar").classList.add("esconder");
@@ -40,7 +55,9 @@ function atualizarUsuarios(resposta){
     começarBatePapo = false;
 }
 
-
+function TratarErroMsg(){
+    window.location.reload();
+}
 function TratarErro(erro)
 {
     console.log(erro.response.status);
@@ -61,19 +78,19 @@ function ImprimirMensagens(resposta){
         if(resposta.data[i].type==="status"){
         msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
-            (${resposta.data[i].time}) ${resposta.data[i].from} ${resposta.data[i].text}
+            (${resposta.data[i].time}) <b>${resposta.data[i].from}</b> ${resposta.data[i].text}
         </div>`;
         }
     if(resposta.data[i].type==="message"){
         msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
-            (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
+            (${resposta.data[i].time}) <b>${resposta.data[i].from}</b> para <b>${resposta.data[i].to}</b>: ${resposta.data[i].text}
         </div>`;
         }
     if(resposta.data[i].type==="private-message"&&resposta.data[i].to === seuUsuario.name){
         msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
-        (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
+        (${resposta.data[i].time}) <b>${resposta.data[i].from}</b> para <b>${resposta.data[i].to}</b>: ${resposta.data[i].text}
         </div>`;
         }
         
