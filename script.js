@@ -26,7 +26,10 @@ function ReceberUsuarios(){
 function atualizarUsuarios(resposta){
     usuarios = resposta;
     console.log(usuarios);
-    if(começarBatePapo) ativarBatePapo();
+    if(começarBatePapo){
+        setInterval(ativarBatePapo,3000);
+        setInterval(EnviarUsuario,5000);
+    } 
     começarBatePapo = false;
 }
 
@@ -36,33 +39,36 @@ function TratarErro(erro)
     if(começarBatePapo==true) document.querySelector(".erro").classList.remove("esconder");
 }
 
-function ativarBatePapo(){
-    setInterval(EnviarUsuario,5000);
+function ativarBatePapo(){  
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     promise.then(ImprimirMensagens)
+    
 }
 
 function ImprimirMensagens(resposta){
     console.log(resposta);
+    let msg = document.querySelector(".corpo");
+    msg.innerHTML="";
     for(let i=0;i<resposta.data.length;i++){
         if(resposta.data[i].type==="status"){
-        document.querySelector(".corpo").innerHTML+= 
+        msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
             (${resposta.data[i].time}) ${resposta.data[i].from} ${resposta.data[i].text}
         </div>`;
         }
     if(resposta.data[i].type==="message"){
-        document.querySelector(".corpo").innerHTML+= 
+        msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
             (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
     if(resposta.data[i].type==="private-message"){
-        document.querySelector(".corpo").innerHTML+= 
+        msg.innerHTML+= 
         `<div class="${resposta.data[i].type}">
         (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
     }
+    window.scrollTo(0, document.body.scrollHeight);
 }
 

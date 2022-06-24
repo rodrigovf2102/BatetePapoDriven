@@ -73,6 +73,9 @@
     font-family: 'Roboto';
     font-size: 18px;
     margin-bottom: 80px;
+    height: auto;
+    position: static;
+    bottom:80px;
 }
 .corpo div{
     padding-top: 5px;
