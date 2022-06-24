@@ -2,6 +2,7 @@ let usuarios = [];
 let seuUsuario = [];
 let novoUsuario = [];
 let começarBatePapo = true;
+let ultimaMsgAnterior="";
 
 function PegarUsuario(novoUsuario){
     novoUsuario.value="";
@@ -68,7 +69,12 @@ function ImprimirMensagens(resposta){
         (${resposta.data[i].time}) ${resposta.data[i].from} para ${resposta.data[i].to}: ${resposta.data[i].text}
         </div>`;
         }
+        
+    }  
+    if(ultimaMsgAnterior !== resposta.data[resposta.data.length-1].time.toString()) {
+        window.scrollTo(0, document.body.scrollHeight);
     }
-    window.scrollTo(0, document.body.scrollHeight);
+    console.log(ultimaMsgAnterior,"1",resposta.data[resposta.data.length-1].time)
+    ultimaMsgAnterior = resposta.data[resposta.data.length-1].time.toString();
 }
 
