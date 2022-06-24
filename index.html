@@ -22,15 +22,25 @@
         <div onclick="EnviarUsuario()">Entrar</div>
         <div class="erro esconder">Nome inválido, digite outro</div>
     </div>
+    <div class="menu-lateral esconder">
+        <div class="lateral">
+            <div>Escolha um contato para enviar mensagem:</div>
+            <div class="item-lateral" onclick="selecionarContatoLateral(this)">
+                <ion-icon name="people"></ion-icon>
+                <div>Todos</div> 
+            </div>
+        </div>
+    </div>
     <div class="topo">
         <img src="imagens/uol.png">
-        <ion-icon name="people"></ion-icon>
+        <ion-icon name="people" onclick="menuLateral()"></ion-icon>
     </div>
     <div class="corpo">
     </div>
     <div class="fundo">
         <input value="Escreva aqui..." onclick="PegarUsuario(this)"></input>
         <ion-icon name="paper-plane-outline" onclick="EnviarMsgAoServidor()"></ion-icon>
+        <div class="msg-privada"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -14,6 +14,52 @@
     align-items: center;
     justify-content: center;
 }
+.menu-lateral{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: end;
+}
+.lateral{
+    width: 68%;
+    background-color: white;
+    height: 100%;
+}
+.lateral > :nth-child(1){
+    width: 100%;
+    height: 84px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.item-lateral{
+    width: 100%;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    justify-content: start;
+    padding-left: 17px;
+    margin-bottom: 15px;
+}
+.item-lateral :nth-child(2){
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+}
+
+
 .entrar :nth-child(1)
 {
    width: 130px; 
@@ -96,7 +142,7 @@
 .status{
     background-color:#DCDCDC;
 }
-.private-message{
+.private_message{
     background-color:#FFDEDE
 }
 
@@ -111,6 +157,7 @@
     bottom:0;
     left: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
@@ -121,7 +168,7 @@
     font-style: italic;
     font-size: 18px;
 }
-.fundo ion-icon{
+ion-icon{
     font-size: 30px;
 }
 .fundo input
