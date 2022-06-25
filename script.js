@@ -5,6 +5,7 @@ let começarBatePapo = true;
 let ultimaMsgAnterior = "";
 let destinatario = "Todos";
 let tipo = "message";
+let visibilidade = "Público"
 
 function PegarUsuario(novoUsuario) {
     novoUsuario.value = "";
@@ -93,7 +94,7 @@ function ImprimirMensagens(resposta) {
             if (resposta.data[i].to === seuUsuario.name || resposta.data[i].to === destinatario) {
                 msg.innerHTML +=
                     `<div class="${resposta.data[i].type}">
-        (${resposta.data[i].time}) <b>${resposta.data[i].from}</b> para <b>${resposta.data[i].to}</b>: ${resposta.data[i].text}
+        (${resposta.data[i].time}) <b>${resposta.data[i].from}</b> ${visibilidade.toLocaleLowerCase()} para <b>${resposta.data[i].to}</b>: ${resposta.data[i].text}
         </div>`;
             }
         }
@@ -112,33 +113,77 @@ function menuLateral() {
     itemsLaterais.innerHTML =
     `<div>Escolha um contato para enviar mensagem:</div>
         <div class="item-lateral" onclick="selecionarContatoLateral(this)">
-            <ion-icon name="people"></ion-icon>
-            <div>Todos</div>
-    </div> `;
+            <div>
+                <ion-icon name="people"></ion-icon>
+                <div class="contato">Todos</div>
+            </div>
+            <ion-icon class="checkmark aparecer" name="checkmark-outline"></ion-icon>
+        </div> `;
     for (let i = 0; i < usuarios.length; i++) {
         itemsLaterais.innerHTML +=
             `<div class="item-lateral" onclick="selecionarContatoLateral(this)">
-                <ion-icon name="people"></ion-icon>
-                <div>${usuarios[i].name}</div> 
-             </div>`;
+                <div>
+                    <ion-icon name="people"></ion-icon>
+                    <div class="contato">${usuarios[i].name}</div> 
+                </div>
+                <ion-icon class="checkmark esconder" name="checkmark-outline"></ion-icon>`;
     }
+    itemsLaterais.innerHTML += `<div class="visibilidade">Escolha a visibilidade:</div>
+                                <div class="item-lateral" onclick="selecionarVisibilidade(this)">
+                                    <div>
+                                        <ion-icon name="lock-open"></ion-icon>
+                                        <div class="pv">Público</div>
+                                    </div>
+                                    <ion-icon class="checkmarkv aparecer" name="checkmark-outline"></ion-icon>
+                                </div>
+                                <div class="item-lateral" onclick="selecionarVisibilidade(this)">
+                                    <div>
+                                        <ion-icon name="lock-closed"></ion-icon>
+                                        <div class="pv">Reservadamente</div>
+                                    </div>
+                                    <ion-icon class="checkmarkv esconder" name="checkmark-outline"></ion-icon>
+                                </div>`;
+                                
 }
 
 function selecionarContatoLateral(contato) {
-    destinatario = contato.querySelector("div").innerHTML;
+    destinatario = contato.querySelector(".contato").innerHTML;
+    document.querySelector(".checkmark.aparecer").classList.add("esconder");
+    document.querySelector(".checkmark.aparecer").classList.remove("aparecer");
+    
+    contato.querySelector(".checkmark.esconder").classList.add("aparecer");
+    contato.querySelector(".checkmark.esconder").classList.remove("esconder");
+    receberVisibilidadeEContato();
+}
+function selecionarVisibilidade(elemento){
+    visibilidade = elemento.querySelector(".pv").innerHTML;
+    document.querySelector(".checkmarkv.aparecer").classList.add("esconder");
+    document.querySelector(".checkmarkv.aparecer").classList.remove("aparecer");
+    
+    elemento.querySelector(".checkmarkv").classList.remove("esconder");
+    elemento.querySelector(".checkmarkv").classList.add("aparecer");
+    receberVisibilidadeEContato();
+}
+function receberVisibilidadeEContato(){  
     if (destinatario === "Todos") {
         tipo = "message";
         const msgTodos = document.querySelector(".msg-privada")
         msgTodos.innerHTML ="";
-        console.log("aaaa");
     }
-    if (destinatario !== "Todos") {
+    if (destinatario !== "Todos" && visibilidade == "Reservadamente") {
         tipo = "private_message";
         const msgReservada= document.querySelector(".msg-privada");
         
-        msgReservada.innerHTML = `Enviando para ${destinatario} (reservadamente)`;
-        console.log("bbb");
+        msgReservada.innerHTML = `Enviando para ${destinatario} (${visibilidade})`;
     }
+    if (destinatario !== "Todos" && visibilidade == "Público") {
+        tipo = "message";
+        const msgReservada= document.querySelector(".msg-privada");
+        
+        msgReservada.innerHTML = `Enviando para ${destinatario} (${visibilidade})`;
+    }
+}
+
+function sairMenuLateral(){
     document.querySelector(".menu-lateral").classList.add("esconder");
-    console.log(destinatario, tipo);
 }

@@ -23,12 +23,14 @@
         <div class="erro esconder">Nome inválido, digite outro</div>
     </div>
     <div class="menu-lateral esconder">
+        <div class="lateral-escuro" onclick="sairMenuLateral()"></div>
         <div class="lateral">
             <div>Escolha um contato para enviar mensagem:</div>
             <div class="item-lateral" onclick="selecionarContatoLateral(this)">
                 <ion-icon name="people"></ion-icon>
-                <div>Todos</div> 
+                <div>Todos<ion-icon class="checkmark" name="checkmark-outline"></ion-icon></div>
             </div>
+            <div class="visbilidade">Escolha a visibilidade:</div>
         </div>
     </div>
     <div class="topo">
